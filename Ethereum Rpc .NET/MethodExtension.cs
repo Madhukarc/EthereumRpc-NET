@@ -7,6 +7,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using EthereumRpc;
+using System.Globalization;
 
 namespace System
 {
@@ -44,7 +45,9 @@ namespace System
             var divRem1 = BigInteger.Zero;
             var bal = BigInteger.DivRem(value, 1000000000000000000, out divRem1);
             var balanceString = string.Format("{0}.{1}", bal, divRem1);
-            var decimalBalance = decimal.Parse(balanceString);
+            decimal decimalBalance = 0;
+            //decimal.TryParse(textBox7.Text, out dvalue);
+            bool result  = decimal.TryParse(balanceString, NumberStyles.Float | NumberStyles.AllowExponent, CultureInfo.InvariantCulture, out decimalBalance);
             return decimalBalance.ToString("0.00");
         }
 

@@ -41,9 +41,9 @@ namespace Ethereum.Wallet
 
             LoadAccounts();
 
-            BackgroundWorker bgWorker = new BackgroundWorker();
-            bgWorker.DoWork += BgWorker_DoWork;
-            bgWorker.RunWorkerAsync();
+            //BackgroundWorker bgWorker = new BackgroundWorker();
+            //bgWorker.DoWork += BgWorker_DoWork;
+            //bgWorker.RunWorkerAsync();
 
             cmbSendUnit.DataSource = Enum.GetValues(typeof(EtherUnit));
             cmbSendUnit.SelectedItem = "Ether";
@@ -70,12 +70,12 @@ namespace Ethereum.Wallet
                 a.FilterId = EthereumService.NewFilter(filter);
                 Accounts.Add(a);
 
-                var sign = EthereumService.Sign(a.Address, "hello");
+                var sign = EthereumService.Sign(a.Address, "Pass@123");
 
                 a.Unlocked = sign != null;
 
                 cmdAccounts.Items.Add(a);
-                //EthereumService.UnlockAccount(a.Address, "lawrence");
+                EthereumService.UnlockAccount(a.Address, "Pass@123");
             }
 
             if (accounts.Any())
@@ -90,7 +90,7 @@ namespace Ethereum.Wallet
 
             while (true)
             {
-                RefreshAccount(GetCurrentAccount().Address);
+               // RefreshAccount(GetCurrentAccount().Address);
                 Thread.Sleep(500);
             }
         }

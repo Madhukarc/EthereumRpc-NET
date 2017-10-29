@@ -34,8 +34,13 @@ namespace Ethereum.Wallet
 
         private void btnUnlock_Click(object sender, EventArgs e)
         {
-            var result = EthereumService.UnlockAccount(Account, txtPassword.Text);
-
+            bool result=false; 
+            try
+            {
+                result = EthereumService.UnlockAccount(Account, txtPassword.Text);
+            }
+            catch (Exception ex)
+            { }
             if (!result)
             {
                 MessageBox.Show("Incorrect password");
